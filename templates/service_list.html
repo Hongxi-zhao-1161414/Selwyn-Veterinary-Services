@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Services - SVS{% endblock %}
+
+{% block content %}
+
+<h2>Services</h2>
+
+<p class="text-success"><strong>If you can see this page in PythonAnywhere, then your database and connect.py 
+    are correctly configured.</strong>  </p>
+
+<table class="table">
+    <tr>
+        <th>Service</th>
+        <th>Price</th>
+    </tr>
+    {% for service in services %}
+    <tr>
+        <td>{{ service.service_name }}</td>
+        <td>${{ "%.2f"|format(service.price) }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}
