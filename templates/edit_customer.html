@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Customer - SVS Appointment System{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-primary">Edit Customer: {{ customer.first_name }} {{ customer.family_name }}</h2>
+
+<div class="card shadow col-md-8 mx-auto">
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('edit_customer', customer_id=customer.customer_id) }}">
+            <!-- 客户ID（只读） -->
+            <div class="mb-3">
+                <label for="customer_id" class="form-label">Customer ID</label>
+                <input type="text" class="form-control" id="customer_id" value="{{ customer.customer_id }}" readonly>
+            </div>
+            <!-- 名字 -->
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="first_name" name="first_name" 
+                       value="{{ customer.first_name }}" required>
+            </div>
+            <!-- 姓氏 -->
+            <div class="mb-3">
+                <label for="family_name" class="form-label">Family Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="family_name" name="family_name" 
+                       value="{{ customer.family_name }}" required>
+            </div>
+            <!-- 邮箱 -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email (Optional)</label>
+                <input type="email" class="form-control" id="email" name="email" 
+                       value="{{ customer.email or '' }}" placeholder="Enter email (e.g., john@example.com)">
+            </div>
+            <!-- 电话 -->
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                <input type="tel" class="form-control" id="phone" name="phone" 
+                       value="{{ customer.phone }}" required>
+            </div>
+            <!-- 加入日期（禁用，不可修改） -->
+            <div class="mb-3">
+                <label for="date_joined" class="form-label">Date Joined</label>
+                <input type="date" class="form-control" id="date_joined" value="{{ customer.date_joined_html }}" disabled>
+                <div class="form-text">Date joined cannot be modified</div>
+            </div>
+            <!-- 提交/取消按钮 -->
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Update Customer</button>
+                <a href="{{ url_for('customer_list') }}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

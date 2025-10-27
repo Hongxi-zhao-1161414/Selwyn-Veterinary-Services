@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Services - SVS Appointment System{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-primary">Available Veterinary Services</h2>
+<div class="card shadow">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Service Name</th>
+                        <th>Price (NZD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for service in services %}
+                    <tr>
+                        <td>{{ service.service_name }}</td>
+                        <td>${{ service.price | round(2) }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="2" class="text-center text-muted">No services found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

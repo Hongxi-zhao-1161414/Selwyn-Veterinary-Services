@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Home - SVS Appointment System{% endblock %}
+
+{% block content %}
+<div class="row align-items-center">
+    <!-- 介绍文本 -->
+    <div class="col-md-6">
+        <h1 class="mb-4 text-primary">Welcome to SVS Appointment System</h1>
+        <p class="lead mb-3">
+            Selwyn Veterinary Services (SVS) provides high-quality animal health care for domestic pets and farm animals in Lincoln.
+        </p>
+        <p class="mb-4">
+            Use our online system to:
+        </p>
+        <ul class="list-group list-group-flush mb-4">
+            <li class="list-group-item">View our range of veterinary services</li>
+            <li class="list-group-item">Manage customer information</li>
+            <li class="list-group-item">Schedule new appointments</li>
+            <li class="list-group-item">Track past and future appointments</li>
+            <li class="list-group-item">Generate service usage and earnings reports</li>
+        </ul>
+        <a href="{{ url_for('new_appointment') }}" class="btn btn-primary btn-lg">Book an Appointment</a>
+    </div>
+    <!-- 图片 -->
+    <div class="col-md-6">
+        <img src="https://images.pexels.com/photos/169969/pexels-photo-169969.jpeg?auto=compress&cs=tinysrgb&w=800"
+             alt="Veterinary Clinic with Professional Staff"
+             class="img-fluid rounded shadow">
+    </div>
+</div>
+{% endblock %}

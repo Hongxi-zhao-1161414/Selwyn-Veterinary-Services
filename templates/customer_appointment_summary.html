@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}{{ customer_name }}'s Appointments - SVS Appointment System{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-primary">{{ customer_name }}'s Appointments</h2>
+    <a href="{{ url_for('customer_list') }}" class="btn btn-outline-secondary">Back to Customer List</a>
+</div>
+
+<!-- 新增预约按钮（快速为该客户预约） -->
+<div class="mb-4">
+    <a href="{{ url_for('new_appointment') }}" class="btn btn-primary">
+        Schedule New Appointment for {{ customer_name }}
+    </a>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Services</th>
+                        <th>Total Cost (NZD)</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appt in appointments %}
+                    <tr {% if appt.appt_datetime > now %}class="text-success fw-medium"{% endif %}>
+                        <td>{{ appt.appt_datetime_display }}</td>
+                        <td>
+                            <ul class="list-unstyled mb-0">
+                                {% for service in appt.services %}
+                                <li>{{ service.service_name }} - {{ service.price_display }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>{{ appt.total_cost_display }}</td>
+                        <td>{{ appt.notes }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">
+                            {{ customer_name }} has no scheduled appointments
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

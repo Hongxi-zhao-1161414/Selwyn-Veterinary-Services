@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Service Summary Report - SVS Appointment System{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-primary">Service Usage & Earnings Report</h2>
+
+<div class="card shadow">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Service Name</th>
+                        <th>Unit Price (NZD)</th>
+                        <th>Number of Uses</th>
+                        <th>Total Earnings (NZD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for service in services %}
+                    <tr>
+                        <td>{{ service.service_name }}</td>
+                        <td>{{ service.price_display }}</td>
+                        <td>{{ service.service_count }}</td>
+                        <td>{{ service.total_earnings_display }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">No service data available</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

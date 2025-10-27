@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}New Appointment - SVS Appointment System{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-primary">Schedule New Appointment</h2>
+
+<div class="card shadow col-md-10 mx-auto">
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('new_appointment') }}">
+            <!-- 客户选择 -->
+            <div class="mb-3">
+                <label for="customer_id" class="form-label">Select Customer <span class="text-danger">*</span></label>
+                <select class="form-select" id="customer_id" name="customer_id" required>
+                    <option value="" selected disabled>Choose a customer</option>
+                    {% for customer in customers %}
+                    <option value="{{ customer.customer_id }}">
+                        {{ customer.first_name }} {{ customer.family_name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- 日期时间选择 -->
+            <div class="mb-3">
+                <label for="appt_datetime" class="form-label">Appointment Date & Time <span class="text-danger">*</span></label>
+                <input type="datetime-local" class="form-control" id="appt_datetime" name="appt_datetime" required>
+                <div class="form-text">
+                    - Must be in the future<br>
+                    - Cannot be on Sundays<br>
+                    - Format: YYYY-MM-DD HH:MM
+                </div>
+            </div>
+            <!-- 服务选择（多选） -->
+            <div class="mb-3">
+                <label class="form-label">Select Services <span class="text-danger">*</span></label>
+                <div class="row g-3">
+                    {% for service in services %}
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="service_{{ service.service_id }}" 
+                                   name="services" value="{{ service.service_id }}">
+                            <label class="form-check-label" for="service_{{ service.service_id }}">
+                                {{ service.service_name }} (${{ service.price | round(2) }})
+                            </label>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- 备注 -->
+            <div class="mb-3">
+                <label for="notes" class="form-label">Notes (Optional)</label>
+                <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Enter appointment notes (e.g., reason for visit)"></textarea>
+            </div>
+            <!-- 提交/取消按钮 -->
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Schedule Appointment</button>
+                <a href="{{ url_for('appointment_list') }}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

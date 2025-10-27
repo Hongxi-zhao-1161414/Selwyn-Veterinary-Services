@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Add Customer - SVS Appointment System{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-primary">Add New Customer</h2>
+
+<div class="card shadow col-md-8 mx-auto">
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('add_customer') }}">
+            <!-- 名字 -->
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="first_name" name="first_name" 
+                       placeholder="Enter first name" required>
+            </div>
+            <!-- 姓氏 -->
+            <div class="mb-3">
+                <label for="family_name" class="form-label">Family Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="family_name" name="family_name" 
+                       placeholder="Enter family name" required>
+            </div>
+            <!-- 邮箱（可选） -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email (Optional)</label>
+                <input type="email" class="form-control" id="email" name="email" 
+                       placeholder="Enter email (e.g., john@example.com)">
+            </div>
+            <!-- 电话 -->
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                <input type="tel" class="form-control" id="phone" name="phone" 
+                       placeholder="Enter phone (e.g., 021 123 4567)" required>
+            </div>
+            <!-- 加入日期 -->
+            <div class="mb-3">
+                <label for="date_joined" class="form-label">Date Joined <span class="text-danger">*</span></label>
+                <input type="date" class="form-control" id="date_joined" name="date_joined" 
+                       value="{{ today }}" max="{{ today }}" required>
+                <div class="form-text">Default: Today (cannot be in the future)</div>
+            </div>
+            <!-- 提交/取消按钮 -->
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Add Customer</button>
+                <a href="{{ url_for('customer_list') }}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
