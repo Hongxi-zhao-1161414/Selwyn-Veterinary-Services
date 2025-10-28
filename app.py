@@ -7,22 +7,20 @@ from decimal import Decimal
 app = Flask(__name__)
 app.secret_key = 'svs_secret_2025_secure_key' 
 
-# 初始化数据库连接池
+
 db.init_db(
     app, connect.dbuser, connect.dbpass, connect.dbhost, connect.dbname, connect.dbport
 )
 
 
-# ------------------- 基础路由 -------------------
+
 @app.route("/")
 def home():
-    """首页：显示介绍文本和图片"""
     return render_template("home.html")
 
 
 @app.route("/services", methods=["GET"])
 def service_list():
-    """服务列表页：显示所有服务及价格"""
     cursor = db.get_cursor()
     try:
         query = "SELECT service_id, service_name, price FROM services ORDER BY service_name ASC;"
@@ -37,13 +35,10 @@ def service_list():
     return render_template("service_list.html", services=services)
 
 
-# ------------------- 客户相关路由 -------------------
 @app.route("/customers")
 def customer_list():
-    """客户列表页：按姓氏→名字排序显示所有客户"""
     cursor = db.get_cursor()
     try:
-        # 按姓氏升序、名字升序排序
         query = """
             SELECT customer_id, first_name, family_name, email, phone, date_joined 
             FROM customers 
