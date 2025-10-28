@@ -71,11 +71,11 @@ I created `_process_appointment_data()` to handle this logic once. Now, changing
 
 
 ## 2. Assumptions  
-- The system is used by clinic staff (not customers), so technical jargon like "service summary" is familiar (see Reference 1).  
-- Database traffic will be low (fewer than 100 concurrent users), so the connection pool size (default 5) is sufficient (see Reference 2).  
-- All dates are in New Zealand time, and no timezone conversions are needed (see Reference 3).  
-- Staff will notice flash messages; no need for persistent notifications (see Reference 4).  
-- Appointments rarely need to be deleted, so the current "no delete" design is acceptable (can be added later if requested) (see Reference 5).  
+- The system is used by clinic staff (not customers), so technical jargon like "service summary" is familiar .  
+- Database traffic will be low (fewer than 100 concurrent users), so the connection pool size (default 5) is sufficient .  
+- All dates are in New Zealand time, and no timezone conversions are needed .  
+- Staff will notice flash messages; no need for persistent notifications .  
+- Appointments rarely need to be deleted, so the current "no delete" design is acceptable (can be added later if requested).  
 
 
 
@@ -148,10 +148,3 @@ If appointments were only linked to customers, the system could not distinguish 
 
 While the current model links appointments to customers, adding an `animal_id` foreign key to the `appointments` table would make the system more useful for veterinary staff and align with real-world clinic operations.
 
-
-## References  
-1. Johnson, L. et al. (2020). "User Experience in Veterinary Practice Management Software," *Journal of Medical Systems*, 44(3), 1-8.  
-2. Smith, R. & Lee, K. (2019). "Resource Optimization for Small-Scale Healthcare Databases," *IEEE Access*, 7, 12345-12356.  
-3. W3C Internationalization Working Group. (2021). "Date and Time Handling in Regional Web Applications," *W3C Recommendation*.  
-4. Nielsen, J. (2018). "Error Messages: The Good, the Bad, and the Ugly," *Nielsen Norman Group*.  
-5. Brown, A. (2022). "Veterinary Practice Record-Keeping Standards," *Journal of Veterinary Medical Education*, 49(2), 189-201.
